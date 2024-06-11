@@ -27,23 +27,30 @@ class H264Transport {
         if (!fmtp) {
             return;
         }
-        const fmtpConfig = transform.parseParams(fmtp.config);
-        const splitSpropParameterSets = fmtpConfig['sprop-parameter-sets'].toString().split(',');
-        const sps_base64 = splitSpropParameterSets[0];
-        const pps_base64 = splitSpropParameterSets[1];
-        const sps = new Buffer(sps_base64, "base64");
-        const pps = new Buffer(pps_base64, "base64");
-        this.stream.write(H264_HEADER);
-        this.stream.write(sps);
-        this.stream.write(H264_HEADER);
-        this.stream.write(pps);
-        this._headerWritten = true;
+        try {
+            const fmtpConfig = transform.parseParams(fmtp.config);
+            const splitSpropParameterSets = fmtpConfig['sprop-parameter-sets'].toString().split(',');
+            const sps_base64 = splitSpropParameterSets[0];
+            const pps_base64 = splitSpropParameterSets[1];
+            const sps = new Buffer(sps_base64, "base64");
+            const pps = new Buffer(pps_base64, "base64");
+            this.stream.write(H264_HEADER);
+            this.stream.write(sps);
+            this.stream.write(H264_HEADER);
+            this.stream.write(pps);
+            this._headerWritten = true;
+        }
+        catch (e) {
+            console.error("Error parsing SPS/PPS", e);
+            this._headerWritten = true;
+        }
     }
     processRTPPacket(packet) {
         // Accumatate RTP packets
         this.rtpPackets.push(packet.payload);
+        const fuEndBit = (packet.payload[1] >> 6) & 0x01;
         // When Marker is set to 1 pass the group of packets to processRTPFrame()
-        if (packet.marker == 1) {
+        if (packet.marker === 1 || fuEndBit === 1) {
             this.processRTPFrame(this.rtpPackets);
             this.rtpPackets = [];
         }
