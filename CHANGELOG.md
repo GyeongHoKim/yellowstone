@@ -1,3 +1,11 @@
+# 1.0.0 (2026-04-16)
+
+
+### Bug Fixes
+
+* delete unused files ([d1ae05c](https://github.com/GyeongHoKim/yellowstone/commit/d1ae05c4696429565dbd6d95fe1b00fca2db7349))
+* type guard of channelInterleavedNumber ([a363562](https://github.com/GyeongHoKim/yellowstone/commit/a363562f128a85abf9cf9faa5bd1578e754009c6))
+
 # Next Release
 
 # 3.0.8 - 15th January 2027
