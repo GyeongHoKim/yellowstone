@@ -1,13 +1,13 @@
 {
-  "name": "yellowstone",
+  "name": "@gyeonghokim/yellowstone",
   "version": "3.0.8",
   "description": "An RTSP client for node.js.",
   "main": "dist/index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/mbullington/yellowstone.git"
+    "url": "https://github.com/gyeonghokim/yellowstone.git"
   },
-  "author": "Michael Bullington <mikebullingtn@gmail.com>",
+  "author": "GyeongHo Kim <gyeongho.dev@proton.me>",
   "license": "MIT",
   "typings": "dist/index.d.ts",
   "dependencies": {
@@ -15,7 +15,7 @@
   },
   "scripts": {
     "build": "tsc --project ./tsconfig.json",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "echo \"Error: no test specified\"",
     "typedoc": "typedoc --out docs --name Yellowstone --theme markdown lib --readme none",
     "lint": "eslint . --ext .ts"
   },

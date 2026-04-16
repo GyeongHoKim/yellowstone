@@ -1,12 +1,13 @@
-yellowstone v3.0.8
-===
+# @gyeonghokim/yellowstone
 
-[![NPM](https://img.shields.io/npm/v/yellowstone.svg)](https://www.npmjs.com/package/yellowstone)
+[![NPM](https://img.shields.io/npm/v/@gyeonghokim/yellowstone.svg)](https://www.npmjs.com/package/@gyeonghokim/yellowstone)
+
+> This is a fork of [yellowstone](https://github.com/mbullington/yellowstone). The original Yellowstone is still actively maintained by Roger Hardiman and has many great new features, but it has not been deployed for the past few years.
 
 The RTP/RTSP client for Node.js.
 
 ```
-npm install yellowstone --save
+npm install @gyeonghokim/yellowstone --save
 ```
 
 ## Getting Started
@@ -18,8 +19,8 @@ Yellowstone is co-developed by Michael Bullington and Roger Hardiman.
 ## Current Features
 
 - Receive Raw RTP/AVP via UDP & TCP (interleaved)
-  * Basic and Digest Authentication
-  * Pause, Play, and Teardown (Close)
+  - Basic and Digest Authentication
+  - Pause, Play, and Teardown (Close)
 - H264/AVC transport parsing (and writing video to a .264 file)
 - H265/HEVC transport parsing (and writing video to a .265 file)
 - H266/VVC transport parsing (and writing video to a .266 file)
@@ -35,11 +36,11 @@ Yellowstone is co-developed by Michael Bullington and Roger Hardiman.
 An example of most API features can be found at [examples/demo.js](examples/demo.js), which will
 connect to a RTSP Stream and dump H264, H265, AV1 and AAC contents to a file.
 For example
-```node examples\demo.js rtsp://myhostname/stream1```
-```node examples\demo.js -u username -p password -t tcp rtsp://myhostname/stream1```
+`node examples\demo.js rtsp://myhostname/stream1`
+`node examples\demo.js -u username -p password -t tcp rtsp://myhostname/stream1`
 
 To testthe output file with a video player you can use FFMPEG's ffplay command
-```ffplay outfile.264```
+`ffplay outfile.264`
 
 While yellowstone is /**not**/ dependent on ffmpeg, converting the file to an .mp4 can be easily
 accomplished with the following command.
@@ -48,12 +49,10 @@ accomplished with the following command.
 ffmpeg -f h264 -i outfile.264 -vcodec copy outfile.mp4
 ```
 
-
 The audio backchannel example from vietelle-solutions can connect to an ONVIF camera and send a .alaw audio file to the camera
 It plays a clip from the Monty Python's Holy Grail.
 An alaw file can be played with
-```ffplay -f alaw -ar 8k -ac 1 audio.alaw```
-
+`ffplay -f alaw -ar 8k -ac 1 audio.alaw`
 
 If you wish to play the H264 file directly, I've had good experience personally with the IINA
 video player for macOS. VLC and FFPLAY also work.
@@ -62,12 +61,15 @@ video player for macOS. VLC and FFPLAY also work.
 
 You can find auto-generated documentation in the [docs](docs/README.md) folder.
 Documentation can be re-generated with
-```npm run typedoc```
+`npm run typedoc`
 
 ## Building from source
-Compile the Typescript source code to Javascrip (in the dist folder) using these commands:-
-```npm install
-   npm run build
+
+Compile the Typescript source code to Javascript (in the dist folder) using these commands:-
+
+```sh
+npm install
+npm run build
 ```
 
 ## Contributing
