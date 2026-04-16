@@ -15,12 +15,11 @@
   },
   "scripts": {
     "build": "tsc --project ./tsconfig.json",
-    "test": "jest",
+    "test": "echo \"Error: no test specified\" && exit 1",
     "typedoc": "typedoc --out docs --name Yellowstone --theme markdown lib --readme none",
     "lint": "eslint . --ext .ts"
   },
   "devDependencies": {
-    "@types/jest": "^28.1.1",
     "@types/node": "^10.12.18",
     "@types/sdp-transform": "^2.4.5",
     "@typescript-eslint/eslint-plugin": "^5.52.0",
@@ -28,7 +27,6 @@
     "commander": "^13.1.0",
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^7.2.0",
-    "jest": "^28.1.3",
     "prettier": "^2.8.4",
     "ts-node": "^10.9.1",
     "typedoc": "^0.23.25",
