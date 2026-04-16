@@ -1,21 +1,55 @@
 {
   "name": "@gyeonghokim/yellowstone",
+  "private": false,
   "version": "3.0.8",
   "description": "An RTSP client for node.js.",
-  "main": "dist/index.js",
+  "keywords": [
+    "rtsp",
+    "rtsp-client",
+    "streaming",
+    "video-streaming",
+    "ip-camera",
+    "network-camera",
+    "sdp",
+    "nodejs",
+    "typescript"
+  ],
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/gyeonghokim/yellowstone.git"
   },
   "author": "GyeongHo Kim <gyeongho.dev@proton.me>",
   "license": "MIT",
-  "typings": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "package.json"
+  ],
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "provenance": true,
+    "tag": "latest"
+  },
   "dependencies": {
     "sdp-transform": "^2.14.1"
   },
   "scripts": {
-    "build": "tsc --project ./tsconfig.json",
-    "test": "echo \"Error: no test specified\"",
+    "build": "tsup",
+    "typecheck": "tsc --noEmit",
+    "prepack": "npm run build",
+    "test": "echo \"No test suite configured\"",
     "typedoc": "typedoc --plugin typedoc-plugin-markdown --out docs --name Yellowstone lib --readme none",
     "lint": "biome lint .",
     "format": "biome format . --write",
@@ -23,11 +57,15 @@
   },
   "devDependencies": {
     "@biomejs/biome": "^2.2.4",
-    "@types/node": "^10.12.18",
+    "@types/node": "^24.0.0",
     "@types/sdp-transform": "^2.4.5",
     "commander": "^13.1.0",
+    "tsup": "^8.5.0",
     "typedoc": "^0.28.14",
     "typedoc-plugin-markdown": "^4.9.0",
     "typescript": "^6.0.2"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   }
 }

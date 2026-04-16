@@ -1,17 +1,13 @@
 {
   "compilerOptions": {
-    "target": "es2017",
+    "target": "ES2020",
     "rootDir": "lib",
-    "outDir": "dist",
-    "module": "commonjs",
-    "moduleResolution": "node",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
     "strict": true,
-    "noCheck": true,
+    "noEmit": true,
     "skipLibCheck": true,
-    "declaration": true,
-    "sourceMap": true,
-    "inlineSources": true,
-    "lib": ["es2017"],
+    "lib": ["ES2020"],
     "types": ["node", "sdp-transform"],
     "ignoreDeprecations": "6.0"
   },
