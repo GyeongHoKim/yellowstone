@@ -767,10 +767,18 @@ export default class RTSPClient extends EventEmitter {
       |1 Byte     |1 Byte            |2 Bytes    |
       */
       channelInterleaved = channelInterleaved.split("-")[0];
+      const channelInterleavedNumber = Number(channelInterleaved);
+      if (
+        !Number.isInteger(channelInterleavedNumber) ||
+        channelInterleavedNumber < 0 ||
+        channelInterleavedNumber > 255
+      ) {
+        throw new Error(`Invalid interleaved channel: ${channelInterleaved}`);
+      }
       let interleavedHeader = Buffer.from([0x24]); // set '$'
       interleavedHeader = Buffer.concat([
         interleavedHeader,
-        Buffer.from([channelInterleaved]),
+        Buffer.from([channelInterleavedNumber]),
       ]);
       interleavedHeader = Buffer.concat([interleavedHeader, bufferLength]);
       const dataToSend = Buffer.concat([interleavedHeader, rtp.packet]);
