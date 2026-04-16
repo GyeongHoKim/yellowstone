@@ -11,7 +11,5 @@
     "types": ["node", "sdp-transform"],
     "ignoreDeprecations": "6.0"
   },
-  "include": [
-    "lib/**/*"
-  ]
+  "include": ["lib/**/*"]
 }

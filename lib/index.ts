@@ -6,7 +6,7 @@ import AACTransport from "./transports/AACTransport";
 import ONVIFMetadataTransport from "./transports/ONVIFMetadataTransport";
 import ONVIFClient from "./ONVIFClient";
 import RTSPClient from "./RTSPClient";
-import {RTPPacket, RTCPPacket} from "./util";
+import { RTPPacket, RTCPPacket } from "./util";
 
 export {
   H264Transport,
@@ -18,5 +18,5 @@ export {
   ONVIFClient,
   RTSPClient,
   RTPPacket,
-  RTCPPacket
-}
+  RTCPPacket,
+};

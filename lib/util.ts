@@ -19,20 +19,21 @@ export interface RTPPacket {
 }
 
 export function parseRTPPacket(buffer: Buffer): RTPPacket {
-  const padding = (buffer[0] >> 5) & 0x01
+  const padding = (buffer[0] >> 5) & 0x01;
   let paddingLength = 0;
   if (padding == 1) {
     // padding size is the last byte of the RTP data
     paddingLength = buffer[buffer.length - 1];
   }
   const hasExtensions = (buffer[0] >> 4) & 0x01;
-  const marker = (buffer[1]) >>> 7;
+  const marker = buffer[1] >>> 7;
   const payloadType = buffer[1] & 0x7f;
-  const num_csrc_identifiers = (buffer[0] & 0x0F);
+  const num_csrc_identifiers = buffer[0] & 0x0f;
 
-  const payload = buffer.slice((num_csrc_identifiers * 4) + (hasExtensions ? 16 : 12)); // includes padding
+  const payload = buffer.slice(
+    num_csrc_identifiers * 4 + (hasExtensions ? 16 : 12),
+  ); // includes padding
   const length = payload.length;
-
 
   return {
     id: buffer.readUInt16BE(2),
@@ -68,7 +69,6 @@ export interface RTCPPacket {
 }
 
 export function parseRTCPPacket(buffer: Buffer): RTCPPacket {
-
   // Packet Types
   // SR         Sender Report                200
   // RR         Receiver Report              201
@@ -78,12 +78,13 @@ export function parseRTCPPacket(buffer: Buffer): RTCPPacket {
   // RTPFB      Generic RTP feedback         205
   // PSFB       Payload-specific feedback    206
   // XR         RTCP Extension               207
-  const version = (buffer[0] >> 6);
+  const version = buffer[0] >> 6;
   const padding = (buffer[0] >> 5) & 0x01;
-  const receptionReportCount = (buffer[0]) & 0x1F;
+  const receptionReportCount = buffer[0] & 0x1f;
   const packetType = buffer[1];
-  const length = buffer[2] << 8 + buffer[3]; // The length in 32 bit words (not the length in bytes)
-  const ssrc = buffer[4] << 24 + buffer[5] << 16 + buffer[6] << 8 + buffer[7];
+  const length = buffer[2] << (8 + buffer[3]); // The length in 32 bit words (not the length in bytes)
+  const ssrc =
+    ((buffer[4] << (24 + buffer[5])) << (16 + buffer[6])) << (8 + buffer[7]);
 
   let result: RTCPPacket = {
     buffer,
@@ -92,7 +93,8 @@ export function parseRTCPPacket(buffer: Buffer): RTCPPacket {
     length,
     ssrc,
     receptionReportCount,
-    packetType};
+    packetType,
+  };
 
   if (packetType == 200) {
     let senderReport: SenderReport = {
@@ -100,7 +102,7 @@ export function parseRTCPPacket(buffer: Buffer): RTCPPacket {
       ntpTimestampLSW: buffer.readUInt32BE(12),
       rtpTimestamp: buffer.readUInt32BE(16),
       senderPacketCount: buffer.readUInt32BE(20),
-      senderOctetCount: buffer.readUInt32BE(24)
+      senderOctetCount: buffer.readUInt32BE(24),
     };
 
     result.senderReport = senderReport;
@@ -146,7 +148,7 @@ export function parseTransport(transport: string): Transport {
 
   return {
     protocol,
-    parameters
+    parameters,
   };
 }
 
@@ -164,13 +166,12 @@ export function generateSSRC(): number {
 // Write to a bitstream and read back as an array
 
 export class BitStream {
-
   data: number[] = []; // Array only stores 0 or 1 (one 'bit' per buffer item)
   // not very efficient on memory
 
   // Constructor
   // constructor() {}
-  
+
   // Functions
   AddValue(value: number, num_bits: number): void {
     // Add each bit to the List
@@ -184,22 +185,22 @@ export class BitStream {
 
     for (let x = 0; x < hex_chars.length; x++) {
       const c = hex_chars.charAt(x);
-      if (c == '0') this.AddValue(0, 4);
-      else if (c == '1') this.AddValue(1, 4);
-      else if (c == '2') this.AddValue(2, 4);
-      else if (c == '3') this.AddValue(3, 4);
-      else if (c == '4') this.AddValue(4, 4);
-      else if (c == '5') this.AddValue(5, 4);
-      else if (c == '6') this.AddValue(6, 4);
-      else if (c == '7') this.AddValue(7, 4);
-      else if (c == '8') this.AddValue(8, 4);
-      else if (c == '9') this.AddValue(9, 4);
-      else if (c == 'A') this.AddValue(10, 4);
-      else if (c == 'B') this.AddValue(11, 4);
-      else if (c == 'C') this.AddValue(12, 4);
-      else if (c == 'D') this.AddValue(13, 4);
-      else if (c == 'E') this.AddValue(14, 4);
-      else if (c == 'F') this.AddValue(15, 4);
+      if (c == "0") this.AddValue(0, 4);
+      else if (c == "1") this.AddValue(1, 4);
+      else if (c == "2") this.AddValue(2, 4);
+      else if (c == "3") this.AddValue(3, 4);
+      else if (c == "4") this.AddValue(4, 4);
+      else if (c == "5") this.AddValue(5, 4);
+      else if (c == "6") this.AddValue(6, 4);
+      else if (c == "7") this.AddValue(7, 4);
+      else if (c == "8") this.AddValue(8, 4);
+      else if (c == "9") this.AddValue(9, 4);
+      else if (c == "A") this.AddValue(10, 4);
+      else if (c == "B") this.AddValue(11, 4);
+      else if (c == "C") this.AddValue(12, 4);
+      else if (c == "D") this.AddValue(13, 4);
+      else if (c == "E") this.AddValue(14, 4);
+      else if (c == "F") this.AddValue(15, 4);
     }
   }
 
@@ -221,12 +222,11 @@ export class BitStream {
     let ptr = 0;
     let shift = 7;
     for (let i = 0; i < this.data.length; i++) {
-      array[ptr] += (this.data[i] << shift);
+      array[ptr] += this.data[i] << shift;
       if (shift == 0) {
         shift = 7;
         ptr++;
-      }
-      else {
+      } else {
         shift--;
       }
     }

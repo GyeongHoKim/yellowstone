@@ -15,10 +15,10 @@ import { Writable } from "stream";
 const H266_HEADER = Buffer.from([0x00, 0x00, 0x00, 0x01]);
 
 interface Details {
-  codec: string
-  mediaSource: transform.MediaDescription
-  rtpChannel: number,
-  rtcpChannel: number
+  codec: string;
+  mediaSource: transform.MediaDescription;
+  rtpChannel: number;
+  rtcpChannel: number;
 }
 
 export default class H266Transport {
@@ -40,24 +40,35 @@ export default class H266Transport {
         this.processRTPPacket(packet);
       }
     });
-
   }
 
   processConnectionDetails(details: Details): void {
     // Extract the DCI, VPS, SPS and PPS from the MediaSource part of the SDP.
     // NOTE the H266 RTP standard makes this optional and we may need to extract this from the RTP payload
     // as inband DCI/VPS/SPS/PPS instead
-    const fmtp = (details.mediaSource.fmtp)[0];
+    const fmtp = details.mediaSource.fmtp[0];
 
     if (!fmtp) {
       return;
     }
 
     const fmtpConfig = transform.parseParams(fmtp.config);
-    const dci = ('sprop-dci' in fmtpConfig) ? Buffer.from(fmtpConfig['sprop-dci']?.toString(), "base64") : null;
-    const vps = ('sprop-vps' in fmtpConfig) ? Buffer.from(fmtpConfig['sprop-vps']?.toString(), "base64") : null; 
-    const sps = ('sprop-sps' in fmtpConfig) ? Buffer.from(fmtpConfig['sprop-sps']?.toString(), "base64") : null;
-    const pps = ('sprop-pps' in fmtpConfig) ? Buffer.from(fmtpConfig['sprop-pps']?.toString(), "base64") : null
+    const dci =
+      "sprop-dci" in fmtpConfig
+        ? Buffer.from(fmtpConfig["sprop-dci"]?.toString(), "base64")
+        : null;
+    const vps =
+      "sprop-vps" in fmtpConfig
+        ? Buffer.from(fmtpConfig["sprop-vps"]?.toString(), "base64")
+        : null;
+    const sps =
+      "sprop-sps" in fmtpConfig
+        ? Buffer.from(fmtpConfig["sprop-sps"]?.toString(), "base64")
+        : null;
+    const pps =
+      "sprop-pps" in fmtpConfig
+        ? Buffer.from(fmtpConfig["sprop-pps"]?.toString(), "base64")
+        : null;
 
     if (dci != null) {
       this.stream.write(H266_HEADER);
@@ -88,8 +99,7 @@ export default class H266Transport {
 
       // Write out the AUD
       this.stream.write(H266_HEADER);
-      this.stream.write(Buffer.from([0x00, 0xA1, 0x88]));
-
+      this.stream.write(Buffer.from([0x00, 0xa1, 0x88]));
     }
   }
 
@@ -98,7 +108,6 @@ export default class H266Transport {
     let partialNal = [];
 
     for (let i = 0; i < rtpPackets.length; i++) {
-
       // Examine the first two bytes of the RTP data, the Payload Header
       // F (Forbidden Bit), must be 0
       // Z (Zero Bit), must be 0
@@ -106,18 +115,18 @@ export default class H266Transport {
       // Type of NAL Unit (5 bits)
       // TID  (TemporalID = TID - 1)
       /*+---------------+---------------+
-        *|0|1|2|3|4|5|6|7|0|1|2|3|4|5|6|7|
-        *+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-        *|F|Z| LayerID   |  Type   | TID |
-        *+-------------+-----------------+
-        */
+       *|0|1|2|3|4|5|6|7|0|1|2|3|4|5|6|7|
+       *+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+       *|F|Z| LayerID   |  Type   | TID |
+       *+-------------+-----------------+
+       */
       const packet = rtpPackets[i];
 
-      const payload_header = (packet[0] << 8) | (packet[1]);
+      const payload_header = (packet[0] << 8) | packet[1];
       const payload_header_f_bit = (payload_header >> 15) & 0x01;
       const payload_header_z_bit = (payload_header >> 14) & 0x01;
-      const payload_header_layer_id = (payload_header >> 8) & 0x3F;
-      const payload_header_type = (payload_header >> 3) & 0x1F;
+      const payload_header_layer_id = (payload_header >> 8) & 0x3f;
+      const payload_header_type = (payload_header >> 3) & 0x1f;
       const payload_header_tid = payload_header & 0x7;
 
       // There are three ways to Packetize NAL units into RTP Packets
@@ -125,10 +134,8 @@ export default class H266Transport {
       //  Aggregation Packet
       //  Fragmentation Unit
 
-
       // Note H266/VVC has a concept of a GDR - Gradual Decoder Refresh
       // and of the IDR - Instantaneous Decoding Refresh
-
 
       // Single NAL Unit Packet
       if (payload_header_type != 28 && payload_header_type != 29) {
@@ -143,7 +150,6 @@ export default class H266Transport {
         console.log("eek - we have not implemented Agregation Packets yet");
       }
 
-
       // Fragmentation Unit
       else if (payload_header_type == 29) {
         //Console.WriteLine("Fragmentation Unit");
@@ -155,10 +161,10 @@ export default class H266Transport {
         //
 
         // Parse Fragmentation Unit Header
-        const fu_header_s = (packet[2] >> 7) & 0x01;  // start marker
-        const fu_header_e = (packet[2] >> 6) & 0x01;  // end marker
+        const fu_header_s = (packet[2] >> 7) & 0x01; // start marker
+        const fu_header_e = (packet[2] >> 6) & 0x01; // end marker
         const fu_header_p = (packet[2] >> 5) & 0x01; // P = last FU of a Coded Picture
-        const fu_header_type = (packet[2] >> 0) & 0x1F; // fu type (5 bits)
+        const fu_header_type = (packet[2] >> 0) & 0x1f; // fu type (5 bits)
 
         // Console.WriteLine("Frag FU-A s=" + fu_header_s + "e=" + fu_header_e);
 
@@ -171,22 +177,20 @@ export default class H266Transport {
           partialNal = [];
 
           // Reconstrut the NAL header from the rtp_payload_header, replacing the Type with FU Type
-          let nal_header = (payload_header & 0xFF07); // strip out existing 'type' which is the "FU Type"
+          let nal_header = payload_header & 0xff07; // strip out existing 'type' which is the "FU Type"
           nal_header = nal_header | (fu_header_type << 3); // and replace it with the fu_header_type
 
-          partialNal.push((nal_header >> 8) & 0xFF);
-          partialNal.push((nal_header >> 0) & 0xFF);
+          partialNal.push((nal_header >> 8) & 0xff);
+          partialNal.push((nal_header >> 0) & 0xff);
         }
-
 
         // Copy the video data
         if (this.has_donl) {
           // start copying after the DONL data
           for (let x = 5; x < packet.length; x++) {
-              partialNal.push(packet[x]); // not very efficient, copying one byte at a time
+            partialNal.push(packet[x]); // not very efficient, copying one byte at a time
           }
-        }
-        else {
+        } else {
           // there is no DONL data
           for (let x = 3; x < packet.length; x++) {
             partialNal.push(packet[x]); // not very efficient, copying one byte at a time
@@ -200,8 +204,7 @@ export default class H266Transport {
           // Add the NAL to the array of NAL units
           nals.push(Buffer.from(partialNal));
         }
-      }
-      else {
+      } else {
         //Console.WriteLine("Unknown Payload Header Type = " + payload_header_type);
       }
     }

@@ -7,7 +7,7 @@ import { RTPPacket } from "../util";
 
 import * as transform from "sdp-transform";
 import { Writable } from "stream";
-import {EOL} from "os";
+import { EOL } from "os";
 
 interface Details {
   codec: string;
@@ -42,7 +42,7 @@ export default class ONVIFMetadataTransport {
     if (packet.marker == 1) {
       // end of xml, write to file
       this.stream.write(this.xml);
-      this.stream.write(EOL+EOL);
+      this.stream.write(EOL + EOL);
       this.xml = "";
     }
   }
