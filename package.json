@@ -53,7 +53,8 @@
     "typedoc": "typedoc --plugin typedoc-plugin-markdown --out docs --name Yellowstone lib --readme none",
     "lint": "biome lint .",
     "format": "biome format . --write",
-    "check": "biome check ."
+    "check": "biome check .",
+    "check:write": "biome check . --write"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.2.4",

@@ -5,11 +5,10 @@
 // (c) 2026 Roger Hardiman
 // Based on my Yellowstone H265 Parser which in turn is based on my SharpRTSP H265 RTP Parser I wrote in September 2018
 
-import RTSPClient from "../RTSPClient";
-import { RTPPacket } from "../util";
-
 import * as transform from "sdp-transform";
 import { Writable } from "stream";
+import RTSPClient from "../RTSPClient";
+import { RTPPacket } from "../util";
 
 // .h266 file header (Annex B)
 const H266_HEADER = Buffer.from([0x00, 0x00, 0x00, 0x01]);

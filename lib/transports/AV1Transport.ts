@@ -5,11 +5,10 @@
 //
 // By Roger Hardiman, May 2025
 
-import RTSPClient from "../RTSPClient";
-import { RTPPacket } from "../util";
-
 import * as transform from "sdp-transform";
 import { Writable } from "stream";
+import RTSPClient from "../RTSPClient";
+import { RTPPacket } from "../util";
 
 interface Details {
   codec: string;

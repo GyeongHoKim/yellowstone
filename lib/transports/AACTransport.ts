@@ -2,11 +2,10 @@
 // Write Audio to a .aac file
 // By Roger Hardiman, October 2019
 
-import RTSPClient from "../RTSPClient";
-import { RTPPacket, BitStream } from "../util";
-
 import * as transform from "sdp-transform";
 import { Writable } from "stream";
+import RTSPClient from "../RTSPClient";
+import { BitStream, RTPPacket } from "../util";
 
 interface Details {
   codec: string;

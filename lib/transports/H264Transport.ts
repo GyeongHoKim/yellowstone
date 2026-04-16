@@ -2,11 +2,10 @@
 // De-packetize RTP packets to re-create H264 NAL Units
 // Write H264 NAL units to a .264 file
 
-import RTSPClient from "../RTSPClient";
-import { RTPPacket } from "../util";
-
 import * as transform from "sdp-transform";
 import { Writable } from "stream";
+import RTSPClient from "../RTSPClient";
+import { RTPPacket } from "../util";
 
 // .h264 file header
 const H264_HEADER = Buffer.from([0x00, 0x00, 0x00, 0x01]);

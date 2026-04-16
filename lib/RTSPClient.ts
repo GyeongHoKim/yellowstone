@@ -5,23 +5,21 @@ import * as tls from "tls";
 type SocketUnion = net.Socket | tls.TLSSocket;
 
 import * as dgram from "dgram";
-import { parse as urlParse } from "url";
 import { EventEmitter } from "events";
-
+import * as transform from "sdp-transform";
+import { parse as urlParse } from "url";
+import RTPPacket from "./transports/RTPPacket";
 import * as util from "./util";
-
 import {
-  parseRTPPacket,
-  parseRTCPPacket,
+  generateSSRC,
   getMD5Hash,
   getSHA256Hash,
-  Transport,
+  parseRTCPPacket,
+  parseRTPPacket,
   parseTransport,
-  generateSSRC,
+  Transport,
 } from "./util";
 
-import * as transform from "sdp-transform";
-import RTPPacket from "./transports/RTPPacket";
 const RTP_AVP = "RTP/AVP";
 const RTP_AVPF = "RTP/AVPF"; // Used by AV1. This is RTP with Feedback (via RTCP) to request Keyframes via RTCP
 
@@ -1143,4 +1141,4 @@ export default class RTSPClient extends EventEmitter {
   }
 }
 
-export { RTPPacket, RTCPPacket } from "./util";
+export { RTCPPacket, RTPPacket } from "./util";
