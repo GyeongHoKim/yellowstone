@@ -13,19 +13,32 @@
 
 // Used to connect to Wowza Demo URL but they have taken it away, and the replacement URL on their web site does not work.
 
-const { RTSPClient, H264Transport, H265Transport, H266Transport, AV1Transport, AACTransport } = require("../dist");
+const {
+  RTSPClient,
+  H264Transport,
+  H265Transport,
+  H266Transport,
+  AV1Transport,
+  AACTransport,
+} = require("../dist");
 const fs = require("fs");
 const { exit } = require("process");
 const { program } = require("commander");
 
 program.name("demo");
 program.description("Yellowstone RTSP Client Test Software");
-program.option('-u, --username <value>', 'Optional RTSP Username');
-program.option('-p, --password <value>', 'Optional RTSP Password');
-program.option('-o, --outfile <value>', 'Optional Output File with no File Extension for captured H264/H265/AV1/AAC');
-program.option('-t, --transport <value>', 'Optional RTP Transport - UDP or TCP');
+program.option("-u, --username <value>", "Optional RTSP Username");
+program.option("-p, --password <value>", "Optional RTSP Password");
+program.option(
+  "-o, --outfile <value>",
+  "Optional Output File with no File Extension for captured H264/H265/AV1/AAC",
+);
+program.option(
+  "-t, --transport <value>",
+  "Optional RTP Transport - UDP or TCP",
+);
 
-program.argument('<rtsp url eg rtsp://1.2.3.4/stream1>');
+program.argument("<rtsp url eg rtsp://1.2.3.4/stream1>");
 
 program.parse(process.argv);
 const options = program.opts();
@@ -34,13 +47,14 @@ const options = program.opts();
 const url = program.args[0];
 let username = "";
 let password = "";
-if ('username' in options) username = options.username;
-if ('password' in options) password = options.password;
+if ("username" in options) username = options.username;
+if ("password" in options) password = options.password;
 
 let transport = "tcp";
-if ('transport' in options) transport = options.transport.toString().toLowerCase();
+if ("transport" in options)
+  transport = options.transport.toString().toLowerCase();
 
-  const filename = "outfile"
+const filename = "outfile";
 
 console.log("Connecting to " + url);
 
@@ -52,12 +66,15 @@ const client = new RTSPClient(username, password);
 // "keepAlive" option is set to true by default
 // "connection" option is set to "udp" by default and defines the method the RTP media packets are set to Yellowstone. Options are "udp" or "tcp" (where RTP media packets are sent down the RTSP connection)
 // "secure" option is set to true when connecting with TLS to the RTSP Server (eg for RTSPS)
-client.connect(url, { connection: transport, secure: false })
+client
+  .connect(url, { connection: transport, secure: false })
   .then(async (detailsArray) => {
     console.log("Connected");
 
     if (detailsArray.length == 0) {
-      console.log("ERROR: There are no compatible RTP payloads to save to disk");
+      console.log(
+        "ERROR: There are no compatible RTP payloads to save to disk",
+      );
       exit();
     }
 
@@ -67,31 +84,31 @@ client.connect(url, { connection: transport, secure: false })
 
       // Step 3: Open the output file
       if (details.codec == "H264") {
-        const videoFile = fs.createWriteStream(filename + '.264');
+        const videoFile = fs.createWriteStream(filename + ".264");
         // Step 4: Create H264Transport passing in the client, file, and details
         // This class subscribes to the client 'data' event, looking for the video payload
         const h264 = new H264Transport(client, videoFile, details);
       }
       if (details.codec == "H265") {
-        const videoFile = fs.createWriteStream(filename + '.265');
+        const videoFile = fs.createWriteStream(filename + ".265");
         // Step 4: Create H265Transport passing in the client, file, and details
         // This class subscribes to the client 'data' event, looking for the video payload
         const h265 = new H265Transport(client, videoFile, details);
       }
       if (details.codec == "H266") {
-        const videoFile = fs.createWriteStream(filename + '.266');
+        const videoFile = fs.createWriteStream(filename + ".266");
         // Step 4: Create H266Transport passing in the client, file, and details
         // This class subscribes to the client 'data' event, looking for the video payload
         const h266 = new H266Transport(client, videoFile, details);
       }
       if (details.codec == "AV1") {
-        const videoFile = fs.createWriteStream(filename + '.obu');
+        const videoFile = fs.createWriteStream(filename + ".obu");
         // Step 4: Create AV1Transport passing in the client, file, and details
         // This class subscribes to the client 'data' event, looking for the video payload
         const av1 = new AV1Transport(client, videoFile, details);
       }
       if (details.codec == "AAC") {
-        const audioFile = fs.createWriteStream(filename + '.aac');
+        const audioFile = fs.createWriteStream(filename + ".aac");
         // Add AAC Transport
         // This class subscribes to the client 'data' event, looking for the audio payload
         const aac = new AACTransport(client, audioFile, details);
@@ -101,18 +118,26 @@ client.connect(url, { connection: transport, secure: false })
     // Step 5: Start streaming!
     await client.play();
     console.log("Play sent");
-
   })
-  .catch(e => {
-      console.log(e);
-      client.removeAllListeners();
-      client.close(true); // true = don't send a TEARDOWN
-    }
-  );
+  .catch((e) => {
+    console.log(e);
+    client.removeAllListeners();
+    client.close(true); // true = don't send a TEARDOWN
+  });
 
 // The "data" event is fired for every RTP packet.
 client.on("data", (channel, data, packet) => {
-  console.log("RTP:", "Channel=" + channel, "TYPE=" + packet.payloadType, "ID=" + packet.id, "TS=" + packet.timestamp, "M=" + packet.marker, (packet.wallclockTime == undefined ? "Time=Unknown" : "Time="+packet.wallclockTime.toISOString()));
+  console.log(
+    "RTP:",
+    "Channel=" + channel,
+    "TYPE=" + packet.payloadType,
+    "ID=" + packet.id,
+    "TS=" + packet.timestamp,
+    "M=" + packet.marker,
+    packet.wallclockTime == undefined
+      ? "Time=Unknown"
+      : "Time=" + packet.wallclockTime.toISOString(),
+  );
 });
 
 // The "controlData" event is fired for every RTCP packet.
@@ -126,4 +151,3 @@ client.on("controlData", (channel, rtcpPacket) => {
 client.on("log", (data, prefix) => {
   console.log(prefix + ": " + data);
 });
-

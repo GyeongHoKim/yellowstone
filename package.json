@@ -1,38 +1,82 @@
 {
-  "name": "yellowstone",
+  "name": "@gyeonghokim/yellowstone",
+  "private": false,
   "version": "3.0.8",
   "description": "An RTSP client for node.js.",
-  "main": "dist/index.js",
+  "keywords": [
+    "rtsp",
+    "rtsp-client",
+    "streaming",
+    "video-streaming",
+    "ip-camera",
+    "network-camera",
+    "sdp",
+    "nodejs",
+    "typescript"
+  ],
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
   "repository": {
     "type": "git",
-    "url": "https://github.com/mbullington/yellowstone.git"
+    "url": "https://github.com/gyeonghokim/yellowstone.git"
   },
-  "author": "Michael Bullington <mikebullingtn@gmail.com>",
+  "author": "GyeongHo Kim <gyeongho.dev@proton.me>",
   "license": "MIT",
-  "typings": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "package.json"
+  ],
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "provenance": true,
+    "tag": "latest"
+  },
   "dependencies": {
     "sdp-transform": "^2.14.1"
   },
   "scripts": {
-    "build": "tsc --project ./tsconfig.json",
-    "test": "jest",
-    "typedoc": "typedoc --out docs --name Yellowstone --theme markdown lib --readme none",
-    "lint": "eslint . --ext .ts"
+    "build": "tsup",
+    "typecheck": "tsc --noEmit",
+    "prepack": "npm run build",
+    "test": "echo \"No test suite configured\"",
+    "typedoc": "typedoc --plugin typedoc-plugin-markdown --out docs --name Yellowstone lib --readme none",
+    "lint": "biome lint .",
+    "format": "biome format . --write",
+    "check": "biome check .",
+    "check:write": "biome check . --write",
+    "prepare": "husky",
+    "release": "semantic-release"
   },
   "devDependencies": {
-    "@types/jest": "^28.1.1",
-    "@types/node": "^10.12.18",
+    "@biomejs/biome": "^2.2.4",
+    "@commitlint/cli": "^20.5.0",
+    "@commitlint/config-angular": "^20.5.0",
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/github": "^12.0.6",
+    "@semantic-release/npm": "^13.1.5",
+    "@types/node": "^24.0.0",
     "@types/sdp-transform": "^2.4.5",
-    "@typescript-eslint/eslint-plugin": "^5.52.0",
-    "@typescript-eslint/parser": "^5.52.0",
     "commander": "^13.1.0",
-    "eslint": "^7.32.0",
-    "eslint-config-prettier": "^7.2.0",
-    "jest": "^28.1.3",
-    "prettier": "^2.8.4",
-    "ts-node": "^10.9.1",
-    "typedoc": "^0.23.25",
-    "typedoc-plugin-markdown": "^3.14.0",
-    "typescript": "^4.9.5"
+    "husky": "^9.1.7",
+    "semantic-release": "^25.0.3",
+    "tsup": "^8.5.0",
+    "typedoc": "^0.28.14",
+    "typedoc-plugin-markdown": "^4.9.0",
+    "typescript": "^6.0.2"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   }
 }

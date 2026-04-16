@@ -2,12 +2,11 @@
 // Write data to a file
 // By Roger Hardiman, December 2021
 
-import RTSPClient from "../RTSPClient";
-import { RTPPacket } from "../util";
-
+import { EOL } from "os";
 import * as transform from "sdp-transform";
 import { Writable } from "stream";
-import {EOL} from "os";
+import RTSPClient from "../RTSPClient";
+import { RTPPacket } from "../util";
 
 interface Details {
   codec: string;
@@ -42,7 +41,7 @@ export default class ONVIFMetadataTransport {
     if (packet.marker == 1) {
       // end of xml, write to file
       this.stream.write(this.xml);
-      this.stream.write(EOL+EOL);
+      this.stream.write(EOL + EOL);
       this.xml = "";
     }
   }

@@ -2,20 +2,19 @@
 // De-packetize RTP packets to re-create H265 NAL Units
 // Write H265 NAL units to a .265 file
 
-import RTSPClient from "../RTSPClient";
-import { RTPPacket } from "../util";
-
 import * as transform from "sdp-transform";
 import { Writable } from "stream";
+import RTSPClient from "../RTSPClient";
+import { RTPPacket } from "../util";
 
 // .h265 file header
 const H265_HEADER = Buffer.from([0x00, 0x00, 0x00, 0x01]);
 
 interface Details {
-  codec: string
-  mediaSource: transform.MediaDescription
-  rtpChannel: number,
-  rtcpChannel: number
+  codec: string;
+  mediaSource: transform.MediaDescription;
+  rtpChannel: number;
+  rtcpChannel: number;
 }
 
 export default class H265Transport {
@@ -37,23 +36,22 @@ export default class H265Transport {
         this.processRTPPacket(packet);
       }
     });
-
   }
 
   processConnectionDetails(details: Details): void {
     // Extract the VPS, SPS and PPS from the MediaSource part of the SDP.
     // NOTE the H265 RTP standard makes this optional and we may need to extract this from the RTP payload
     // as inband VPS/SPS/PPS instead
-    const fmtp = (details.mediaSource.fmtp)[0];
+    const fmtp = details.mediaSource.fmtp[0];
 
     if (!fmtp) {
       return;
     }
 
     const fmtpConfig = transform.parseParams(fmtp.config);
-    const vps = Buffer.from(fmtpConfig['sprop-vps'].toString(), "base64");
-    const sps = Buffer.from(fmtpConfig['sprop-sps'].toString(), "base64");
-    const pps = Buffer.from(fmtpConfig['sprop-pps'].toString(), "base64");
+    const vps = Buffer.from(fmtpConfig["sprop-vps"].toString(), "base64");
+    const sps = Buffer.from(fmtpConfig["sprop-sps"].toString(), "base64");
+    const pps = Buffer.from(fmtpConfig["sprop-pps"].toString(), "base64");
 
     this.stream.write(H265_HEADER);
     this.stream.write(vps);
@@ -79,31 +77,29 @@ export default class H265Transport {
     let partialNal = [];
 
     for (let i = 0; i < rtpPackets.length; i++) {
-
       // Examine the first two bytes of the RTP data, the Payload Header
       // F (Forbidden Bit),
       // Type of NAL Unit (or VCL NAL Unit if Type is < 32),
       // LayerId
       // TID  (TemporalID = TID - 1)
       /*+---------------+---------------+
-        *|0|1|2|3|4|5|6|7|0|1|2|3|4|5|6|7|
-        *+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-        *|F|   Type    |  LayerId  | TID |
-        *+-------------+-----------------+
-        */
+       *|0|1|2|3|4|5|6|7|0|1|2|3|4|5|6|7|
+       *+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+       *|F|   Type    |  LayerId  | TID |
+       *+-------------+-----------------+
+       */
       const packet = rtpPackets[i];
 
-      const payload_header = (packet[0] << 8) | (packet[1]);
+      const payload_header = (packet[0] << 8) | packet[1];
       const payload_header_f_bit = (payload_header >> 15) & 0x01;
-      const payload_header_type = (payload_header >> 9) & 0x3F;
-      const payload_header_layer_id = (payload_header >> 3) & 0x3F;
+      const payload_header_type = (payload_header >> 9) & 0x3f;
+      const payload_header_layer_id = (payload_header >> 3) & 0x3f;
       const payload_header_tid = payload_header & 0x7;
 
       // There are three ways to Packetize NAL units into RTP Packets
       //  Single NAL Unit Packet
       //  Aggregation Packet (payload_header_type = 48)
       //  Fragmentation Unit (payload_header_type = 49)
-
 
       // Single NAL Unit Packet
       // 32=VPS
@@ -120,7 +116,6 @@ export default class H265Transport {
         console.log("eek");
       }
 
-
       // Fragmentation Unit
       else if (payload_header_type == 49) {
         //Console.WriteLine("Fragmentation Unit");
@@ -129,12 +124,12 @@ export default class H265Transport {
         //   +-+-+-+-+-+-+-+-+
         //   |S|E|  FuType   |
         //   +---------------+
-       //
+        //
 
         // Parse Fragmentation Unit Header
-        const fu_header_s = (packet[2] >> 7) & 0x01;  // start marker
-        const fu_header_e = (packet[2] >> 6) & 0x01;  // end marker
-        const fu_header_type = (packet[2] >> 0) & 0x3F; // fu type
+        const fu_header_s = (packet[2] >> 7) & 0x01; // start marker
+        const fu_header_e = (packet[2] >> 6) & 0x01; // end marker
+        const fu_header_type = (packet[2] >> 0) & 0x3f; // fu type
 
         // Console.WriteLine("Frag FU-A s=" + fu_header_s + "e=" + fu_header_e);
 
@@ -147,13 +142,12 @@ export default class H265Transport {
           partialNal = [];
 
           // Reconstrut the NAL header from the rtp_payload_header, replacing the Type with FU Type
-          let nal_header = (payload_header & 0x81FF); // strip out existing 'type'
+          let nal_header = payload_header & 0x81ff; // strip out existing 'type'
           nal_header = nal_header | (fu_header_type << 9);
 
-          partialNal.push((nal_header >> 8) & 0xFF);
-          partialNal.push((nal_header >> 0) & 0xFF);
+          partialNal.push((nal_header >> 8) & 0xff);
+          partialNal.push((nal_header >> 0) & 0xff);
         }
-
 
         // Copy the video data
         if (this.has_donl) {
@@ -161,8 +155,7 @@ export default class H265Transport {
           for (let x = 5; x < packet.length; x++) {
             partialNal.push(packet[x]); // not very efficient, copying one byte at a time
           }
-        }
-        else {
+        } else {
           // there is no DONL data
           for (let x = 3; x < packet.length; x++) {
             partialNal.push(packet[x]); // not very efficient, copying one byte at a time
@@ -176,8 +169,7 @@ export default class H265Transport {
           // Add the NAL to the array of NAL units
           nals.push(Buffer.from(partialNal));
         }
-      }
-      else {
+      } else {
         //Console.WriteLine("Unknown Payload Header Type = " + payload_header_type);
       }
     }

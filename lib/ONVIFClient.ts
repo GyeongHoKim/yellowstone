@@ -9,8 +9,8 @@ export default class ONVIFClient extends RTSPClient {
   async playFrom(from: Date, to?: Date) {
     const obj = {
       Session: this._session,
-      Immediate: 'yes',
-      Range: `clock=${from.toISOString()}-`
+      Immediate: "yes",
+      Range: `clock=${from.toISOString()}-`,
     };
 
     if (to) {
@@ -24,8 +24,8 @@ export default class ONVIFClient extends RTSPClient {
   async playReverse(from?: Date, to?: Date) {
     const obj: any = {
       Session: this._session,
-      'Rate-Control': 'no',
-      Scale: '-1.0'
+      "Rate-Control": "no",
+      Scale: "-1.0",
     };
 
     if (from) {

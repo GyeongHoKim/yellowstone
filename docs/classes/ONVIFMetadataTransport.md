@@ -1,87 +1,77 @@
+[**Yellowstone**](../README.md)
+
+***
+
 [Yellowstone](../README.md) / ONVIFMetadataTransport
 
 # Class: ONVIFMetadataTransport
 
-## Table of contents
-
-### Constructors
-
-- [constructor](ONVIFMetadataTransport.md#constructor)
-
-### Properties
-
-- [client](ONVIFMetadataTransport.md#client)
-- [stream](ONVIFMetadataTransport.md#stream)
-- [xml](ONVIFMetadataTransport.md#xml)
-
-### Methods
-
-- [processRTPPacket](ONVIFMetadataTransport.md#processrtppacket)
+Defined in: [lib/transports/ONVIFMetadataTransport.ts:19](https://github.com/GyeongHoKim/yellowstone/blob/e74fb7d8afbd8bb9ed410a5a954010ba64363648/lib/transports/ONVIFMetadataTransport.ts#L19)
 
 ## Constructors
 
-### constructor
+### Constructor
 
-• **new ONVIFMetadataTransport**(`client`, `stream`, `details`)
+> **new ONVIFMetadataTransport**(`client`, `stream`, `details`): `ONVIFMetadataTransport`
+
+Defined in: [lib/transports/ONVIFMetadataTransport.ts:24](https://github.com/GyeongHoKim/yellowstone/blob/e74fb7d8afbd8bb9ed410a5a954010ba64363648/lib/transports/ONVIFMetadataTransport.ts#L24)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `client` | [`RTSPClient`](RTSPClient.md) |
-| `stream` | `Writable` |
-| `details` | `Details` |
+##### client
 
-#### Defined in
+[`RTSPClient`](RTSPClient.md)
 
-[lib/transports/ONVIFMetadataTransport.ts:24](https://github.com/mbullington/yellowstone/blob/b881ee4/lib/transports/ONVIFMetadataTransport.ts#L24)
+##### stream
+
+`Writable`
+
+##### details
+
+`Details`
+
+#### Returns
+
+`ONVIFMetadataTransport`
 
 ## Properties
 
 ### client
 
-• **client**: [`RTSPClient`](RTSPClient.md)
+> **client**: [`RTSPClient`](RTSPClient.md)
 
-#### Defined in
+Defined in: [lib/transports/ONVIFMetadataTransport.ts:20](https://github.com/GyeongHoKim/yellowstone/blob/e74fb7d8afbd8bb9ed410a5a954010ba64363648/lib/transports/ONVIFMetadataTransport.ts#L20)
 
-[lib/transports/ONVIFMetadataTransport.ts:20](https://github.com/mbullington/yellowstone/blob/b881ee4/lib/transports/ONVIFMetadataTransport.ts#L20)
-
-___
+***
 
 ### stream
 
-• **stream**: `Writable`
+> **stream**: `Writable`
 
-#### Defined in
+Defined in: [lib/transports/ONVIFMetadataTransport.ts:21](https://github.com/GyeongHoKim/yellowstone/blob/e74fb7d8afbd8bb9ed410a5a954010ba64363648/lib/transports/ONVIFMetadataTransport.ts#L21)
 
-[lib/transports/ONVIFMetadataTransport.ts:21](https://github.com/mbullington/yellowstone/blob/b881ee4/lib/transports/ONVIFMetadataTransport.ts#L21)
-
-___
+***
 
 ### xml
 
-• **xml**: `string`
+> **xml**: `string`
 
-#### Defined in
-
-[lib/transports/ONVIFMetadataTransport.ts:22](https://github.com/mbullington/yellowstone/blob/b881ee4/lib/transports/ONVIFMetadataTransport.ts#L22)
+Defined in: [lib/transports/ONVIFMetadataTransport.ts:22](https://github.com/GyeongHoKim/yellowstone/blob/e74fb7d8afbd8bb9ed410a5a954010ba64363648/lib/transports/ONVIFMetadataTransport.ts#L22)
 
 ## Methods
 
-### processRTPPacket
+### processRTPPacket()
 
-▸ **processRTPPacket**(`packet`): `void`
+> **processRTPPacket**(`packet`): `void`
+
+Defined in: [lib/transports/ONVIFMetadataTransport.ts:36](https://github.com/GyeongHoKim/yellowstone/blob/e74fb7d8afbd8bb9ed410a5a954010ba64363648/lib/transports/ONVIFMetadataTransport.ts#L36)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `packet` | [`RTPPacket`](../interfaces/RTPPacket.md) |
+##### packet
+
+[`RTPPacket`](../interfaces/RTPPacket.md)
 
 #### Returns
 
 `void`
-
-#### Defined in
-
-[lib/transports/ONVIFMetadataTransport.ts:36](https://github.com/mbullington/yellowstone/blob/b881ee4/lib/transports/ONVIFMetadataTransport.ts#L36)
