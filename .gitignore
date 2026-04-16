@@ -33,3 +33,6 @@ debug
 # IDE settings
 .idea
 .vscode
+
+# build output
+dist
