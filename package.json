@@ -1,7 +1,7 @@
 {
   "name": "@gyeonghokim/yellowstone",
   "private": false,
-  "version": "1.0.0",
+  "version": "3.0.8",
   "description": "An RTSP client for node.js.",
   "keywords": [
     "rtsp",

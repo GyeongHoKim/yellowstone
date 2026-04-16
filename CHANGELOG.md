@@ -1,20 +1,21 @@
-# 1.0.0 (2026-04-16)
-
+# 3.0.8 (2026-04-16)
 
 ### Bug Fixes
 
-* delete unused files ([d1ae05c](https://github.com/GyeongHoKim/yellowstone/commit/d1ae05c4696429565dbd6d95fe1b00fca2db7349))
-* type guard of channelInterleavedNumber ([a363562](https://github.com/GyeongHoKim/yellowstone/commit/a363562f128a85abf9cf9faa5bd1578e754009c6))
+- delete unused files ([d1ae05c](https://github.com/GyeongHoKim/yellowstone/commit/d1ae05c4696429565dbd6d95fe1b00fca2db7349))
+- type guard of channelInterleavedNumber ([a363562](https://github.com/GyeongHoKim/yellowstone/commit/a363562f128a85abf9cf9faa5bd1578e754009c6))
 
 # Next Release
 
 # 3.0.8 - 15th January 2027
+
 Add caching Digest Authentication code from Leone25 Enrico
 Fix bug causing an error with Panasonic Cameras returning RTP/AVP/UDP in SETUP
 Add -t to the example demo.js to pick the RTP transport (-t udp or -t tcp)
 Handle multiple WWW-Authenticate responses (which is valid) and pick Digest over Basic
 
 # 3.0.7 - 13th January 2027
+
 Add H266 (VVC) support with output to a .266 file.
 Tested with https://github.com/jimm98y/SharpRealTimeStreaming which uses the SharpRTSP Library
 
@@ -61,7 +62,6 @@ Fixed OPTIONS keepalive by sending Session ID
 **New features**:
 Output AAC Audio as well as H264 video
 
-
 # v3.0.1
 
 **Bug fixes**:
@@ -75,8 +75,8 @@ Huge shoutout to @RogerHardiman for co-developing this release of the library!
 **Breaking changes**:
 
 - Expected Node.js version increased to Node.js LTS (`8.11.3`).
-  * This code may still work on older Node.js versions, but they're not officially supported.
-  * If this does not work for you, rebuilding using a lower target in `tsconfig.json` should help.
+  - This code may still work on older Node.js versions, but they're not officially supported.
+  - If this does not work for you, rebuilding using a lower target in `tsconfig.json` should help.
 - Removed `RTCPPacket.payload` that was deprecated in `v2.1.1`
 - Renamed `RtspClient` to `RTSPClient`
 - Renamed `OnvifRtspClient` to `ONVIFClient`
@@ -87,17 +87,17 @@ New features:
 - H264 transport!
 - UDP support!
 - Move to TypeScript & new ES2017 features
-  * **Why?** TypeScript should help improve code quality (something I've noticed in my old code the past few months through GitHub issues & pull requests). Type errors, general confusion about code, etc.
-  * Async/await control flow helps to simplify codebase and make it more readable.
-  * Hopefully, this will not alieniate potential contributors.
+  - **Why?** TypeScript should help improve code quality (something I've noticed in my old code the past few months through GitHub issues & pull requests). Type errors, general confusion about code, etc.
+  - Async/await control flow helps to simplify codebase and make it more readable.
+  - Hopefully, this will not alieniate potential contributors.
 
 # v2.1.1
 
 **Breaking changes**:
 
 - Parsed RTCP header deprecated the `payload` value to remove potentially confusing functionality
-, replacing it with `buffer`. For now, `payload` will still work, but will log a message to switch
-to the new key.
+  , replacing it with `buffer`. For now, `payload` will still work, but will log a message to switch
+  to the new key.
 
 New features:
 
@@ -114,14 +114,14 @@ New features:
 New features:
 
 - Basic parsing for RTCP, splits into the `data` and `controlData` emitted events. (both have same
-parameters, see above).
+  parameters, see above).
 - Improvements to RTP header parsing.
 
 Huge thanks to @RogerHardiman for the contributions!
 
 # v2.0.0
 
-The `it works again!` update: 
+The `it works again!` update:
 
 - A large refactor, so I decided to bump up the major version.
 - Fix embarassing errors with copy-pasted JS code from 1.5 years ago.
