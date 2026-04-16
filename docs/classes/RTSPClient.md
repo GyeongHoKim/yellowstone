@@ -1,561 +1,492 @@
+[**Yellowstone**](../README.md)
+
+***
+
 [Yellowstone](../README.md) / RTSPClient
 
 # Class: RTSPClient
 
-## Hierarchy
+Defined in: [lib/RTSPClient.ts:106](https://github.com/GyeongHoKim/yellowstone/blob/e74fb7d8afbd8bb9ed410a5a954010ba64363648/lib/RTSPClient.ts#L106)
+
+## Extends
 
 - `EventEmitter`
 
-  ↳ **`RTSPClient`**
+## Extended by
 
-  ↳↳ [`ONVIFClient`](ONVIFClient.md)
-
-## Table of contents
-
-### Constructors
-
-- [constructor](RTSPClient.md#constructor)
-
-### Properties
-
-- [\_cSeq](RTSPClient.md#_cseq)
-- [\_client](RTSPClient.md#_client)
-- [\_keepAliveID](RTSPClient.md#_keepaliveid)
-- [\_nextFreeInterleavedChannel](RTSPClient.md#_nextfreeinterleavedchannel)
-- [\_nextFreeUDPPort](RTSPClient.md#_nextfreeudpport)
-- [\_session](RTSPClient.md#_session)
-- [\_unsupportedExtensions](RTSPClient.md#_unsupportedextensions)
-- [\_url](RTSPClient.md#_url)
-- [clientSSRC](RTSPClient.md#clientssrc)
-- [closed](RTSPClient.md#closed)
-- [headers](RTSPClient.md#headers)
-- [isConnected](RTSPClient.md#isconnected)
-- [messageBytes](RTSPClient.md#messagebytes)
-- [password](RTSPClient.md#password)
-- [readState](RTSPClient.md#readstate)
-- [rtspContentLength](RTSPClient.md#rtspcontentlength)
-- [rtspHeaders](RTSPClient.md#rtspheaders)
-- [rtspPacket](RTSPClient.md#rtsppacket)
-- [rtspPacketLength](RTSPClient.md#rtsppacketlength)
-- [rtspPacketPointer](RTSPClient.md#rtsppacketpointer)
-- [rtspStatusLine](RTSPClient.md#rtspstatusline)
-- [setupResult](RTSPClient.md#setupresult)
-- [tcpSocket](RTSPClient.md#tcpsocket)
-- [username](RTSPClient.md#username)
-- [defaultMaxListeners](RTSPClient.md#defaultmaxlisteners)
-
-### Methods
-
-- [\_emptyReceiverReport](RTSPClient.md#_emptyreceiverreport)
-- [\_netConnect](RTSPClient.md#_netconnect)
-- [\_onData](RTSPClient.md#_ondata)
-- [\_sendInterleavedData](RTSPClient.md#_sendinterleaveddata)
-- [\_sendUDPData](RTSPClient.md#_sendudpdata)
-- [\_socketWrite](RTSPClient.md#_socketwrite)
-- [addListener](RTSPClient.md#addlistener)
-- [close](RTSPClient.md#close)
-- [connect](RTSPClient.md#connect)
-- [emit](RTSPClient.md#emit)
-- [eventNames](RTSPClient.md#eventnames)
-- [getMaxListeners](RTSPClient.md#getmaxlisteners)
-- [listenerCount](RTSPClient.md#listenercount)
-- [listeners](RTSPClient.md#listeners)
-- [off](RTSPClient.md#off)
-- [on](RTSPClient.md#on)
-- [once](RTSPClient.md#once)
-- [pause](RTSPClient.md#pause)
-- [play](RTSPClient.md#play)
-- [prependListener](RTSPClient.md#prependlistener)
-- [prependOnceListener](RTSPClient.md#prependoncelistener)
-- [rawListeners](RTSPClient.md#rawlisteners)
-- [removeAllListeners](RTSPClient.md#removealllisteners)
-- [removeListener](RTSPClient.md#removelistener)
-- [request](RTSPClient.md#request)
-- [respond](RTSPClient.md#respond)
-- [sendAudioBackChannel](RTSPClient.md#sendaudiobackchannel)
-- [setMaxListeners](RTSPClient.md#setmaxlisteners)
-- [listenerCount](RTSPClient.md#listenercount-1)
-- [once](RTSPClient.md#once-1)
+- [`ONVIFClient`](ONVIFClient.md)
 
 ## Constructors
 
-### constructor
+### Constructor
 
-• **new RTSPClient**(`username`, `password`, `headers?`)
+> **new RTSPClient**(`username`, `password`, `headers?`): `RTSPClient`
+
+Defined in: [lib/RTSPClient.ts:151](https://github.com/GyeongHoKim/yellowstone/blob/e74fb7d8afbd8bb9ed410a5a954010ba64363648/lib/RTSPClient.ts#L151)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `username` | `string` |
-| `password` | `string` |
-| `headers?` | `Object` |
+##### username
+
+`string`
+
+##### password
+
+`string`
+
+##### headers?
+
+#### Returns
+
+`RTSPClient`
 
 #### Overrides
 
-EventEmitter.constructor
-
-#### Defined in
-
-[lib/RTSPClient.ts:128](https://github.com/mbullington/yellowstone/blob/b881ee4/lib/RTSPClient.ts#L128)
+`EventEmitter.constructor`
 
 ## Properties
 
+### \_authOpions?
+
+> `optional` **\_authOpions?**: `AuthOptions`
+
+Defined in: [lib/RTSPClient.ts:120](https://github.com/GyeongHoKim/yellowstone/blob/e74fb7d8afbd8bb9ed410a5a954010ba64363648/lib/RTSPClient.ts#L120)
+
+***
+
+### \_client?
+
+> `optional` **\_client?**: `SocketUnion`
+
+Defined in: [lib/RTSPClient.ts:117](https://github.com/GyeongHoKim/yellowstone/blob/e74fb7d8afbd8bb9ed410a5a954010ba64363648/lib/RTSPClient.ts#L117)
+
+***
+
 ### \_cSeq
 
-• **\_cSeq**: `number` = `0`
+> **\_cSeq**: `number` = `0`
 
-#### Defined in
+Defined in: [lib/RTSPClient.ts:118](https://github.com/GyeongHoKim/yellowstone/blob/e74fb7d8afbd8bb9ed410a5a954010ba64363648/lib/RTSPClient.ts#L118)
 
-[lib/RTSPClient.ts:96](https://github.com/mbullington/yellowstone/blob/b881ee4/lib/RTSPClient.ts#L96)
+***
 
-___
+### \_keepAliveID?
 
-### \_client
+> `optional` **\_keepAliveID?**: `Timeout`
 
-• `Optional` **\_client**: `Socket`
+Defined in: [lib/RTSPClient.ts:123](https://github.com/GyeongHoKim/yellowstone/blob/e74fb7d8afbd8bb9ed410a5a954010ba64363648/lib/RTSPClient.ts#L123)
 
-#### Defined in
-
-[lib/RTSPClient.ts:95](https://github.com/mbullington/yellowstone/blob/b881ee4/lib/RTSPClient.ts#L95)
-
-___
-
-### \_keepAliveID
-
-• `Optional` **\_keepAliveID**: `Timeout`
-
-#### Defined in
-
-[lib/RTSPClient.ts:100](https://github.com/mbullington/yellowstone/blob/b881ee4/lib/RTSPClient.ts#L100)
-
-___
+***
 
 ### \_nextFreeInterleavedChannel
 
-• **\_nextFreeInterleavedChannel**: `number` = `0`
+> **\_nextFreeInterleavedChannel**: `number` = `0`
 
-#### Defined in
+Defined in: [lib/RTSPClient.ts:124](https://github.com/GyeongHoKim/yellowstone/blob/e74fb7d8afbd8bb9ed410a5a954010ba64363648/lib/RTSPClient.ts#L124)
 
-[lib/RTSPClient.ts:101](https://github.com/mbullington/yellowstone/blob/b881ee4/lib/RTSPClient.ts#L101)
-
-___
+***
 
 ### \_nextFreeUDPPort
 
-• **\_nextFreeUDPPort**: `number` = `5000`
+> **\_nextFreeUDPPort**: `number` = `5000`
 
-#### Defined in
+Defined in: [lib/RTSPClient.ts:125](https://github.com/GyeongHoKim/yellowstone/blob/e74fb7d8afbd8bb9ed410a5a954010ba64363648/lib/RTSPClient.ts#L125)
 
-[lib/RTSPClient.ts:102](https://github.com/mbullington/yellowstone/blob/b881ee4/lib/RTSPClient.ts#L102)
+***
 
-___
+### \_session?
 
-### \_session
+> `optional` **\_session?**: `string`
 
-• `Optional` **\_session**: `string`
+Defined in: [lib/RTSPClient.ts:122](https://github.com/GyeongHoKim/yellowstone/blob/e74fb7d8afbd8bb9ed410a5a954010ba64363648/lib/RTSPClient.ts#L122)
 
-#### Defined in
+***
 
-[lib/RTSPClient.ts:99](https://github.com/mbullington/yellowstone/blob/b881ee4/lib/RTSPClient.ts#L99)
+### \_unsupportedExtensions?
 
-___
+> `optional` **\_unsupportedExtensions?**: `string`[]
 
-### \_unsupportedExtensions
+Defined in: [lib/RTSPClient.ts:119](https://github.com/GyeongHoKim/yellowstone/blob/e74fb7d8afbd8bb9ed410a5a954010ba64363648/lib/RTSPClient.ts#L119)
 
-• `Optional` **\_unsupportedExtensions**: `string`[]
+***
 
-#### Defined in
+### \_url?
 
-[lib/RTSPClient.ts:97](https://github.com/mbullington/yellowstone/blob/b881ee4/lib/RTSPClient.ts#L97)
+> `optional` **\_url?**: `string`
 
-___
+Defined in: [lib/RTSPClient.ts:116](https://github.com/GyeongHoKim/yellowstone/blob/e74fb7d8afbd8bb9ed410a5a954010ba64363648/lib/RTSPClient.ts#L116)
 
-### \_url
-
-• `Optional` **\_url**: `string`
-
-#### Defined in
-
-[lib/RTSPClient.ts:94](https://github.com/mbullington/yellowstone/blob/b881ee4/lib/RTSPClient.ts#L94)
-
-___
+***
 
 ### clientSSRC
 
-• **clientSSRC**: `number`
+> **clientSSRC**: `number`
 
-#### Defined in
+Defined in: [lib/RTSPClient.ts:147](https://github.com/GyeongHoKim/yellowstone/blob/e74fb7d8afbd8bb9ed410a5a954010ba64363648/lib/RTSPClient.ts#L147)
 
-[lib/RTSPClient.ts:124](https://github.com/mbullington/yellowstone/blob/b881ee4/lib/RTSPClient.ts#L124)
-
-___
+***
 
 ### closed
 
-• **closed**: `boolean` = `false`
+> **closed**: `boolean` = `false`
 
-#### Defined in
+Defined in: [lib/RTSPClient.ts:112](https://github.com/GyeongHoKim/yellowstone/blob/e74fb7d8afbd8bb9ed410a5a954010ba64363648/lib/RTSPClient.ts#L112)
 
-[lib/RTSPClient.ts:90](https://github.com/mbullington/yellowstone/blob/b881ee4/lib/RTSPClient.ts#L90)
-
-___
+***
 
 ### headers
 
-• **headers**: `Object`
+> **headers**: `object`
 
-#### Index signature
+Defined in: [lib/RTSPClient.ts:109](https://github.com/GyeongHoKim/yellowstone/blob/e74fb7d8afbd8bb9ed410a5a954010ba64363648/lib/RTSPClient.ts#L109)
 
-▪ [key: `string`]: `string`
+#### Index Signature
 
-#### Defined in
+\[`key`: `string`\]: `string`
 
-[lib/RTSPClient.ts:87](https://github.com/mbullington/yellowstone/blob/b881ee4/lib/RTSPClient.ts#L87)
-
-___
+***
 
 ### isConnected
 
-• **isConnected**: `boolean` = `false`
+> **isConnected**: `boolean` = `false`
 
-#### Defined in
+Defined in: [lib/RTSPClient.ts:111](https://github.com/GyeongHoKim/yellowstone/blob/e74fb7d8afbd8bb9ed410a5a954010ba64363648/lib/RTSPClient.ts#L111)
 
-[lib/RTSPClient.ts:89](https://github.com/mbullington/yellowstone/blob/b881ee4/lib/RTSPClient.ts#L89)
-
-___
+***
 
 ### messageBytes
 
-• **messageBytes**: `number`[] = `[]`
+> **messageBytes**: `number`[] = `[]`
 
-#### Defined in
+Defined in: [lib/RTSPClient.ts:131](https://github.com/GyeongHoKim/yellowstone/blob/e74fb7d8afbd8bb9ed410a5a954010ba64363648/lib/RTSPClient.ts#L131)
 
-[lib/RTSPClient.ts:108](https://github.com/mbullington/yellowstone/blob/b881ee4/lib/RTSPClient.ts#L108)
+***
 
-___
+### ntpBaseDate\_ms
+
+> **ntpBaseDate\_ms**: `number`
+
+Defined in: [lib/RTSPClient.ts:1071](https://github.com/GyeongHoKim/yellowstone/blob/e74fb7d8afbd8bb9ed410a5a954010ba64363648/lib/RTSPClient.ts#L1071)
+
+***
 
 ### password
 
-• **password**: `string`
+> **password**: `string`
 
-#### Defined in
+Defined in: [lib/RTSPClient.ts:108](https://github.com/GyeongHoKim/yellowstone/blob/e74fb7d8afbd8bb9ed410a5a954010ba64363648/lib/RTSPClient.ts#L108)
 
-[lib/RTSPClient.ts:86](https://github.com/mbullington/yellowstone/blob/b881ee4/lib/RTSPClient.ts#L86)
-
-___
+***
 
 ### readState
 
-• **readState**: `ReadStates` = `ReadStates.SEARCHING`
+> **readState**: `ReadStates` = `ReadStates.SEARCHING`
 
-#### Defined in
+Defined in: [lib/RTSPClient.ts:127](https://github.com/GyeongHoKim/yellowstone/blob/e74fb7d8afbd8bb9ed410a5a954010ba64363648/lib/RTSPClient.ts#L127)
 
-[lib/RTSPClient.ts:104](https://github.com/mbullington/yellowstone/blob/b881ee4/lib/RTSPClient.ts#L104)
-
-___
+***
 
 ### rtspContentLength
 
-• **rtspContentLength**: `number` = `0`
+> **rtspContentLength**: `number` = `0`
 
-#### Defined in
+Defined in: [lib/RTSPClient.ts:136](https://github.com/GyeongHoKim/yellowstone/blob/e74fb7d8afbd8bb9ed410a5a954010ba64363648/lib/RTSPClient.ts#L136)
 
-[lib/RTSPClient.ts:113](https://github.com/mbullington/yellowstone/blob/b881ee4/lib/RTSPClient.ts#L113)
-
-___
+***
 
 ### rtspHeaders
 
-• **rtspHeaders**: `Headers` = `{}`
+> **rtspHeaders**: `Headers` = `{}`
 
-#### Defined in
+Defined in: [lib/RTSPClient.ts:138](https://github.com/GyeongHoKim/yellowstone/blob/e74fb7d8afbd8bb9ed410a5a954010ba64363648/lib/RTSPClient.ts#L138)
 
-[lib/RTSPClient.ts:115](https://github.com/mbullington/yellowstone/blob/b881ee4/lib/RTSPClient.ts#L115)
-
-___
+***
 
 ### rtspPacket
 
-• **rtspPacket**: `Buffer`
+> **rtspPacket**: `Buffer`
 
-#### Defined in
+Defined in: [lib/RTSPClient.ts:143](https://github.com/GyeongHoKim/yellowstone/blob/e74fb7d8afbd8bb9ed410a5a954010ba64363648/lib/RTSPClient.ts#L143)
 
-[lib/RTSPClient.ts:120](https://github.com/mbullington/yellowstone/blob/b881ee4/lib/RTSPClient.ts#L120)
-
-___
+***
 
 ### rtspPacketLength
 
-• **rtspPacketLength**: `number` = `0`
+> **rtspPacketLength**: `number` = `0`
 
-#### Defined in
+Defined in: [lib/RTSPClient.ts:142](https://github.com/GyeongHoKim/yellowstone/blob/e74fb7d8afbd8bb9ed410a5a954010ba64363648/lib/RTSPClient.ts#L142)
 
-[lib/RTSPClient.ts:119](https://github.com/mbullington/yellowstone/blob/b881ee4/lib/RTSPClient.ts#L119)
-
-___
+***
 
 ### rtspPacketPointer
 
-• **rtspPacketPointer**: `number` = `0`
+> **rtspPacketPointer**: `number` = `0`
 
-#### Defined in
+Defined in: [lib/RTSPClient.ts:144](https://github.com/GyeongHoKim/yellowstone/blob/e74fb7d8afbd8bb9ed410a5a954010ba64363648/lib/RTSPClient.ts#L144)
 
-[lib/RTSPClient.ts:121](https://github.com/mbullington/yellowstone/blob/b881ee4/lib/RTSPClient.ts#L121)
-
-___
+***
 
 ### rtspStatusLine
 
-• **rtspStatusLine**: `string` = `""`
+> **rtspStatusLine**: `string` = `""`
 
-#### Defined in
+Defined in: [lib/RTSPClient.ts:137](https://github.com/GyeongHoKim/yellowstone/blob/e74fb7d8afbd8bb9ed410a5a954010ba64363648/lib/RTSPClient.ts#L137)
 
-[lib/RTSPClient.ts:114](https://github.com/mbullington/yellowstone/blob/b881ee4/lib/RTSPClient.ts#L114)
-
-___
+***
 
 ### setupResult
 
-• **setupResult**: `Detail`[] = `[]`
+> **setupResult**: `Detail`[] = `[]`
 
-#### Defined in
+Defined in: [lib/RTSPClient.ts:150](https://github.com/GyeongHoKim/yellowstone/blob/e74fb7d8afbd8bb9ed410a5a954010ba64363648/lib/RTSPClient.ts#L150)
 
-[lib/RTSPClient.ts:127](https://github.com/mbullington/yellowstone/blob/b881ee4/lib/RTSPClient.ts#L127)
-
-___
+***
 
 ### tcpSocket
 
-• **tcpSocket**: `Socket`
+> **tcpSocket**: `SocketUnion`
 
-#### Defined in
+Defined in: [lib/RTSPClient.ts:149](https://github.com/GyeongHoKim/yellowstone/blob/e74fb7d8afbd8bb9ed410a5a954010ba64363648/lib/RTSPClient.ts#L149)
 
-[lib/RTSPClient.ts:126](https://github.com/mbullington/yellowstone/blob/b881ee4/lib/RTSPClient.ts#L126)
-
-___
+***
 
 ### username
 
-• **username**: `string`
+> **username**: `string`
 
-#### Defined in
+Defined in: [lib/RTSPClient.ts:107](https://github.com/GyeongHoKim/yellowstone/blob/e74fb7d8afbd8bb9ed410a5a954010ba64363648/lib/RTSPClient.ts#L107)
 
-[lib/RTSPClient.ts:85](https://github.com/mbullington/yellowstone/blob/b881ee4/lib/RTSPClient.ts#L85)
-
-___
+***
 
 ### defaultMaxListeners
 
-▪ `Static` **defaultMaxListeners**: `number`
+> `static` **defaultMaxListeners**: `number`
+
+Defined in: node\_modules/@types/node/events.d.ts:20
 
 #### Inherited from
 
-EventEmitter.defaultMaxListeners
-
-#### Defined in
-
-node_modules/@types/node/events.d.ts:20
+`EventEmitter.defaultMaxListeners`
 
 ## Methods
 
-### \_emptyReceiverReport
+### \_emptyReceiverReport()
 
-▸ **_emptyReceiverReport**(): `Buffer`
+> **\_emptyReceiverReport**(): `Buffer`
+
+Defined in: [lib/RTSPClient.ts:1002](https://github.com/GyeongHoKim/yellowstone/blob/e74fb7d8afbd8bb9ed410a5a954010ba64363648/lib/RTSPClient.ts#L1002)
 
 #### Returns
 
 `Buffer`
 
-#### Defined in
+***
 
-[lib/RTSPClient.ts:879](https://github.com/mbullington/yellowstone/blob/b881ee4/lib/RTSPClient.ts#L879)
+### \_netConnect()
 
-___
+> **\_netConnect**(`hostname`, `port`, `secure?`): `Promise`\<`RTSPClient`\>
 
-### \_netConnect
-
-▸ **_netConnect**(`hostname`, `port`): `Promise`<[`RTSPClient`](RTSPClient.md)\>
+Defined in: [lib/RTSPClient.ts:173](https://github.com/GyeongHoKim/yellowstone/blob/e74fb7d8afbd8bb9ed410a5a954010ba64363648/lib/RTSPClient.ts#L173)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `hostname` | `string` |
-| `port` | `number` |
+##### hostname
+
+`string`
+
+##### port
+
+`number`
+
+##### secure?
+
+`boolean` = `false`
 
 #### Returns
 
-`Promise`<[`RTSPClient`](RTSPClient.md)\>
+`Promise`\<`RTSPClient`\>
 
-#### Defined in
+***
 
-[lib/RTSPClient.ts:150](https://github.com/mbullington/yellowstone/blob/b881ee4/lib/RTSPClient.ts#L150)
+### \_onData()
 
-___
+> **\_onData**(`data`): `void`
 
-### \_onData
-
-▸ **_onData**(`data`): `void`
+Defined in: [lib/RTSPClient.ts:779](https://github.com/GyeongHoKim/yellowstone/blob/e74fb7d8afbd8bb9ed410a5a954010ba64363648/lib/RTSPClient.ts#L779)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `data` | `Buffer` |
+##### data
 
-#### Returns
-
-`void`
-
-#### Defined in
-
-[lib/RTSPClient.ts:693](https://github.com/mbullington/yellowstone/blob/b881ee4/lib/RTSPClient.ts#L693)
-
-___
-
-### \_sendInterleavedData
-
-▸ **_sendInterleavedData**(`channel`, `buffer`): `void`
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `channel` | `number` |
-| `buffer` | `Buffer` |
+`Buffer`
 
 #### Returns
 
 `void`
 
-#### Defined in
+***
 
-[lib/RTSPClient.ts:853](https://github.com/mbullington/yellowstone/blob/b881ee4/lib/RTSPClient.ts#L853)
+### \_sendInterleavedData()
 
-___
+> **\_sendInterleavedData**(`channel`, `buffer`): `void`
 
-### \_sendUDPData
-
-▸ **_sendUDPData**(`host`, `port`, `buffer`): `void`
+Defined in: [lib/RTSPClient.ts:976](https://github.com/GyeongHoKim/yellowstone/blob/e74fb7d8afbd8bb9ed410a5a954010ba64363648/lib/RTSPClient.ts#L976)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `host` | `string` |
-| `port` | `number` |
-| `buffer` | `Buffer` |
+##### channel
+
+`number`
+
+##### buffer
+
+`Buffer`
 
 #### Returns
 
 `void`
 
-#### Defined in
+***
 
-[lib/RTSPClient.ts:871](https://github.com/mbullington/yellowstone/blob/b881ee4/lib/RTSPClient.ts#L871)
+### \_sendUDPData()
 
-___
+> **\_sendUDPData**(`host`, `port`, `buffer`): `void`
 
-### \_socketWrite
-
-▸ **_socketWrite**(`socket`, `data`): `Promise`<`any`\>
+Defined in: [lib/RTSPClient.ts:994](https://github.com/GyeongHoKim/yellowstone/blob/e74fb7d8afbd8bb9ed410a5a954010ba64363648/lib/RTSPClient.ts#L994)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `socket` | `Socket` |
-| `data` | `Buffer` |
+##### host
+
+`string`
+
+##### port
+
+`number`
+
+##### buffer
+
+`Buffer`
 
 #### Returns
 
-`Promise`<`any`\>
+`void`
 
-#### Defined in
+***
 
-[lib/RTSPClient.ts:898](https://github.com/mbullington/yellowstone/blob/b881ee4/lib/RTSPClient.ts#L898)
+### \_socketWrite()
 
-___
+> **\_socketWrite**(`socket`, `data`): `Promise`\<`any`\>
 
-### addListener
-
-▸ **addListener**(`event`, `listener`): [`RTSPClient`](RTSPClient.md)
+Defined in: [lib/RTSPClient.ts:1021](https://github.com/GyeongHoKim/yellowstone/blob/e74fb7d8afbd8bb9ed410a5a954010ba64363648/lib/RTSPClient.ts#L1021)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `event` | `string` \| `symbol` |
-| `listener` | (...`args`: `any`[]) => `void` |
+##### socket
+
+`SocketUnion`
+
+##### data
+
+`Buffer`
 
 #### Returns
 
-[`RTSPClient`](RTSPClient.md)
+`Promise`\<`any`\>
+
+***
+
+### addListener()
+
+> **addListener**(`event`, `listener`): `this`
+
+Defined in: node\_modules/@types/node/globals.d.ts:554
+
+#### Parameters
+
+##### event
+
+`string` \| `symbol`
+
+##### listener
+
+(...`args`) => `void`
+
+#### Returns
+
+`this`
 
 #### Inherited from
 
-EventEmitter.addListener
+`EventEmitter.addListener`
 
-#### Defined in
+***
 
-node_modules/@types/node/globals.d.ts:554
+### close()
 
-___
+> **close**(`isImmediate?`): `Promise`\<`void`\>
 
-### close
-
-▸ **close**(`isImmediate?`): `Promise`<`void`\>
+Defined in: [lib/RTSPClient.ts:753](https://github.com/GyeongHoKim/yellowstone/blob/e74fb7d8afbd8bb9ed410a5a954010ba64363648/lib/RTSPClient.ts#L753)
 
 #### Parameters
 
-| Name | Type | Default value |
-| :------ | :------ | :------ |
-| `isImmediate` | `boolean` | `false` |
+##### isImmediate?
+
+`boolean` = `false`
 
 #### Returns
 
-`Promise`<`void`\>
+`Promise`\<`void`\>
 
-#### Defined in
+***
 
-[lib/RTSPClient.ts:667](https://github.com/mbullington/yellowstone/blob/b881ee4/lib/RTSPClient.ts#L667)
+### connect()
 
-___
+> **connect**(`url`, `__namedParameters?`): `Promise`\<`Detail`[]\>
 
-### connect
-
-▸ **connect**(`url`, `«destructured»?`): `Promise`<`Detail`[]\>
+Defined in: [lib/RTSPClient.ts:248](https://github.com/GyeongHoKim/yellowstone/blob/e74fb7d8afbd8bb9ed410a5a954010ba64363648/lib/RTSPClient.ts#L248)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `url` | `string` |
-| `«destructured»` | `Object` |
-| › `connection?` | `Connection` |
-| › `keepAlive` | `boolean` |
+##### url
+
+`string`
+
+##### \_\_namedParameters?
+
+###### connection?
+
+`Connection` = `"udp"`
+
+###### keepAlive
+
+`boolean` = `true`
+
+###### secure
+
+`boolean` = `false`
 
 #### Returns
 
-`Promise`<`Detail`[]\>
+`Promise`\<`Detail`[]\>
 
-#### Defined in
+***
 
-[lib/RTSPClient.ts:198](https://github.com/mbullington/yellowstone/blob/b881ee4/lib/RTSPClient.ts#L198)
+### emit()
 
-___
+> **emit**(`event`, ...`args`): `boolean`
 
-### emit
-
-▸ **emit**(`event`, `...args`): `boolean`
+Defined in: node\_modules/@types/node/globals.d.ts:564
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `event` | `string` \| `symbol` |
-| `...args` | `any`[] |
+##### event
+
+`string` \| `symbol`
+
+##### args
+
+...`any`[]
 
 #### Returns
 
@@ -563,17 +494,15 @@ ___
 
 #### Inherited from
 
-EventEmitter.emit
+`EventEmitter.emit`
 
-#### Defined in
+***
 
-node_modules/@types/node/globals.d.ts:564
+### eventNames()
 
-___
+> **eventNames**(): (`string` \| `symbol`)[]
 
-### eventNames
-
-▸ **eventNames**(): (`string` \| `symbol`)[]
+Defined in: node\_modules/@types/node/globals.d.ts:569
 
 #### Returns
 
@@ -581,17 +510,15 @@ ___
 
 #### Inherited from
 
-EventEmitter.eventNames
+`EventEmitter.eventNames`
 
-#### Defined in
+***
 
-node_modules/@types/node/globals.d.ts:569
+### getMaxListeners()
 
-___
+> **getMaxListeners**(): `number`
 
-### getMaxListeners
-
-▸ **getMaxListeners**(): `number`
+Defined in: node\_modules/@types/node/globals.d.ts:561
 
 #### Returns
 
@@ -599,23 +526,43 @@ ___
 
 #### Inherited from
 
-EventEmitter.getMaxListeners
+`EventEmitter.getMaxListeners`
 
-#### Defined in
+***
 
-node_modules/@types/node/globals.d.ts:561
+### GetWallClockTime()
 
-___
+> **GetWallClockTime**(`packet`, `detail`): `Date` \| `undefined`
 
-### listenerCount
-
-▸ **listenerCount**(`type`): `number`
+Defined in: [lib/RTSPClient.ts:1074](https://github.com/GyeongHoKim/yellowstone/blob/e74fb7d8afbd8bb9ed410a5a954010ba64363648/lib/RTSPClient.ts#L1074)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `type` | `string` \| `symbol` |
+##### packet
+
+[`RTPPacket`](../interfaces/RTPPacket.md)
+
+##### detail
+
+`Detail`
+
+#### Returns
+
+`Date` \| `undefined`
+
+***
+
+### listenerCount()
+
+> **listenerCount**(`type`): `number`
+
+Defined in: node\_modules/@types/node/globals.d.ts:565
+
+#### Parameters
+
+##### type
+
+`string` \| `symbol`
 
 #### Returns
 
@@ -623,23 +570,21 @@ ___
 
 #### Inherited from
 
-EventEmitter.listenerCount
+`EventEmitter.listenerCount`
 
-#### Defined in
+***
 
-node_modules/@types/node/globals.d.ts:565
+### listeners()
 
-___
+> **listeners**(`event`): `Function`[]
 
-### listeners
-
-▸ **listeners**(`event`): `Function`[]
+Defined in: node\_modules/@types/node/globals.d.ts:562
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `event` | `string` \| `symbol` |
+##### event
+
+`string` \| `symbol`
 
 #### Returns
 
@@ -647,176 +592,175 @@ ___
 
 #### Inherited from
 
-EventEmitter.listeners
+`EventEmitter.listeners`
 
-#### Defined in
+***
 
-node_modules/@types/node/globals.d.ts:562
+### off()
 
-___
+> **off**(`event`, `listener`): `this`
 
-### off
-
-▸ **off**(`event`, `listener`): [`RTSPClient`](RTSPClient.md)
+Defined in: node\_modules/@types/node/globals.d.ts:558
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `event` | `string` \| `symbol` |
-| `listener` | (...`args`: `any`[]) => `void` |
+##### event
+
+`string` \| `symbol`
+
+##### listener
+
+(...`args`) => `void`
 
 #### Returns
 
-[`RTSPClient`](RTSPClient.md)
+`this`
 
 #### Inherited from
 
-EventEmitter.off
+`EventEmitter.off`
 
-#### Defined in
+***
 
-node_modules/@types/node/globals.d.ts:558
+### on()
 
-___
+> **on**(`event`, `listener`): `this`
 
-### on
-
-▸ **on**(`event`, `listener`): [`RTSPClient`](RTSPClient.md)
+Defined in: node\_modules/@types/node/globals.d.ts:555
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `event` | `string` \| `symbol` |
-| `listener` | (...`args`: `any`[]) => `void` |
+##### event
+
+`string` \| `symbol`
+
+##### listener
+
+(...`args`) => `void`
 
 #### Returns
 
-[`RTSPClient`](RTSPClient.md)
+`this`
 
 #### Inherited from
 
-EventEmitter.on
+`EventEmitter.on`
 
-#### Defined in
+***
 
-node_modules/@types/node/globals.d.ts:555
+### once()
 
-___
+> **once**(`event`, `listener`): `this`
 
-### once
-
-▸ **once**(`event`, `listener`): [`RTSPClient`](RTSPClient.md)
+Defined in: node\_modules/@types/node/globals.d.ts:556
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `event` | `string` \| `symbol` |
-| `listener` | (...`args`: `any`[]) => `void` |
+##### event
+
+`string` \| `symbol`
+
+##### listener
+
+(...`args`) => `void`
 
 #### Returns
 
-[`RTSPClient`](RTSPClient.md)
+`this`
 
 #### Inherited from
 
-EventEmitter.once
+`EventEmitter.once`
 
-#### Defined in
+***
 
-node_modules/@types/node/globals.d.ts:556
+### pause()
 
-___
+> **pause**(): `Promise`\<`void`\>
 
-### pause
-
-▸ **pause**(): `Promise`<`void`\>
+Defined in: [lib/RTSPClient.ts:708](https://github.com/GyeongHoKim/yellowstone/blob/e74fb7d8afbd8bb9ed410a5a954010ba64363648/lib/RTSPClient.ts#L708)
 
 #### Returns
 
-`Promise`<`void`\>
+`Promise`\<`void`\>
 
-#### Defined in
+***
 
-[lib/RTSPClient.ts:622](https://github.com/mbullington/yellowstone/blob/b881ee4/lib/RTSPClient.ts#L622)
+### play()
 
-___
+> **play**(): `Promise`\<`void`\>
 
-### play
-
-▸ **play**(): `Promise`<`void`\>
+Defined in: [lib/RTSPClient.ts:700](https://github.com/GyeongHoKim/yellowstone/blob/e74fb7d8afbd8bb9ed410a5a954010ba64363648/lib/RTSPClient.ts#L700)
 
 #### Returns
 
-`Promise`<`void`\>
+`Promise`\<`void`\>
 
-#### Defined in
+***
 
-[lib/RTSPClient.ts:614](https://github.com/mbullington/yellowstone/blob/b881ee4/lib/RTSPClient.ts#L614)
+### prependListener()
 
-___
+> **prependListener**(`event`, `listener`): `this`
 
-### prependListener
-
-▸ **prependListener**(`event`, `listener`): [`RTSPClient`](RTSPClient.md)
+Defined in: node\_modules/@types/node/globals.d.ts:567
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `event` | `string` \| `symbol` |
-| `listener` | (...`args`: `any`[]) => `void` |
+##### event
+
+`string` \| `symbol`
+
+##### listener
+
+(...`args`) => `void`
 
 #### Returns
 
-[`RTSPClient`](RTSPClient.md)
+`this`
 
 #### Inherited from
 
-EventEmitter.prependListener
+`EventEmitter.prependListener`
 
-#### Defined in
+***
 
-node_modules/@types/node/globals.d.ts:567
+### prependOnceListener()
 
-___
+> **prependOnceListener**(`event`, `listener`): `this`
 
-### prependOnceListener
-
-▸ **prependOnceListener**(`event`, `listener`): [`RTSPClient`](RTSPClient.md)
+Defined in: node\_modules/@types/node/globals.d.ts:568
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `event` | `string` \| `symbol` |
-| `listener` | (...`args`: `any`[]) => `void` |
+##### event
+
+`string` \| `symbol`
+
+##### listener
+
+(...`args`) => `void`
 
 #### Returns
 
-[`RTSPClient`](RTSPClient.md)
+`this`
 
 #### Inherited from
 
-EventEmitter.prependOnceListener
+`EventEmitter.prependOnceListener`
 
-#### Defined in
+***
 
-node_modules/@types/node/globals.d.ts:568
+### rawListeners()
 
-___
+> **rawListeners**(`event`): `Function`[]
 
-### rawListeners
-
-▸ **rawListeners**(`event`): `Function`[]
+Defined in: node\_modules/@types/node/globals.d.ts:563
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `event` | `string` \| `symbol` |
+##### event
+
+`string` \| `symbol`
 
 #### Returns
 
@@ -824,219 +768,222 @@ ___
 
 #### Inherited from
 
-EventEmitter.rawListeners
+`EventEmitter.rawListeners`
 
-#### Defined in
+***
 
-node_modules/@types/node/globals.d.ts:563
+### removeAllListeners()
 
-___
+> **removeAllListeners**(`event?`): `this`
 
-### removeAllListeners
-
-▸ **removeAllListeners**(`event?`): [`RTSPClient`](RTSPClient.md)
+Defined in: node\_modules/@types/node/globals.d.ts:559
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `event?` | `string` \| `symbol` |
+##### event?
+
+`string` \| `symbol`
 
 #### Returns
 
-[`RTSPClient`](RTSPClient.md)
+`this`
 
 #### Inherited from
 
-EventEmitter.removeAllListeners
+`EventEmitter.removeAllListeners`
 
-#### Defined in
+***
 
-node_modules/@types/node/globals.d.ts:559
+### removeListener()
 
-___
+> **removeListener**(`event`, `listener`): `this`
 
-### removeListener
-
-▸ **removeListener**(`event`, `listener`): [`RTSPClient`](RTSPClient.md)
+Defined in: node\_modules/@types/node/globals.d.ts:557
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `event` | `string` \| `symbol` |
-| `listener` | (...`args`: `any`[]) => `void` |
+##### event
+
+`string` \| `symbol`
+
+##### listener
+
+(...`args`) => `void`
 
 #### Returns
 
-[`RTSPClient`](RTSPClient.md)
+`this`
 
 #### Inherited from
 
-EventEmitter.removeListener
+`EventEmitter.removeListener`
 
-#### Defined in
+***
 
-node_modules/@types/node/globals.d.ts:557
+### request()
 
-___
+> **request**(`requestName`, `headersParam?`, `url?`): `Promise`\<`void` \| \{ `headers`: `Headers`; `mediaHeaders?`: `string`[]; \}\>
 
-### request
-
-▸ **request**(`requestName`, `headersParam?`, `url?`): `Promise`<`void` \| { `headers`: `Headers` ; `mediaHeaders?`: `string`[]  }\>
+Defined in: [lib/RTSPClient.ts:563](https://github.com/GyeongHoKim/yellowstone/blob/e74fb7d8afbd8bb9ed410a5a954010ba64363648/lib/RTSPClient.ts#L563)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `requestName` | `string` |
-| `headersParam` | `Headers` |
-| `url?` | `string` |
+##### requestName
+
+`string`
+
+##### headersParam?
+
+`Headers` = `{}`
+
+##### url?
+
+`string`
 
 #### Returns
 
-`Promise`<`void` \| { `headers`: `Headers` ; `mediaHeaders?`: `string`[]  }\>
+`Promise`\<`void` \| \{ `headers`: `Headers`; `mediaHeaders?`: `string`[]; \}\>
 
-#### Defined in
+***
 
-[lib/RTSPClient.ts:466](https://github.com/mbullington/yellowstone/blob/b881ee4/lib/RTSPClient.ts#L466)
+### respond()
 
-___
+> **respond**(`status`, `headersParam?`): `void`
 
-### respond
-
-▸ **respond**(`status`, `headersParam?`): `void`
+Defined in: [lib/RTSPClient.ts:679](https://github.com/GyeongHoKim/yellowstone/blob/e74fb7d8afbd8bb9ed410a5a954010ba64363648/lib/RTSPClient.ts#L679)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `status` | `string` |
-| `headersParam` | `Headers` |
+##### status
+
+`string`
+
+##### headersParam?
+
+`Headers` = `{}`
 
 #### Returns
 
 `void`
 
-#### Defined in
+***
 
-[lib/RTSPClient.ts:593](https://github.com/mbullington/yellowstone/blob/b881ee4/lib/RTSPClient.ts#L593)
+### sendAudioBackChannel()
 
-___
+> **sendAudioBackChannel**(`audioChunk`): `Promise`\<`void`\>
 
-### sendAudioBackChannel
-
-▸ **sendAudioBackChannel**(`audioChunk`): `Promise`<`void`\>
+Defined in: [lib/RTSPClient.ts:716](https://github.com/GyeongHoKim/yellowstone/blob/e74fb7d8afbd8bb9ed410a5a954010ba64363648/lib/RTSPClient.ts#L716)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `audioChunk` | `Buffer` |
+##### audioChunk
+
+`Buffer`
 
 #### Returns
 
-`Promise`<`void`\>
+`Promise`\<`void`\>
 
-#### Defined in
+***
 
-[lib/RTSPClient.ts:630](https://github.com/mbullington/yellowstone/blob/b881ee4/lib/RTSPClient.ts#L630)
+### setMaxListeners()
 
-___
+> **setMaxListeners**(`n`): `this`
 
-### setMaxListeners
-
-▸ **setMaxListeners**(`n`): [`RTSPClient`](RTSPClient.md)
+Defined in: node\_modules/@types/node/globals.d.ts:560
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `n` | `number` |
+##### n
+
+`number`
 
 #### Returns
 
-[`RTSPClient`](RTSPClient.md)
+`this`
 
 #### Inherited from
 
-EventEmitter.setMaxListeners
+`EventEmitter.setMaxListeners`
 
-#### Defined in
+***
 
-node_modules/@types/node/globals.d.ts:560
+### ~~listenerCount()~~
 
-___
+> `static` **listenerCount**(`emitter`, `event`): `number`
 
-### listenerCount
-
-▸ `Static` **listenerCount**(`emitter`, `event`): `number`
-
-**`Deprecated`**
-
-since v4.0.0
+Defined in: node\_modules/@types/node/events.d.ts:17
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `emitter` | `EventEmitter` |
-| `event` | `string` \| `symbol` |
+##### emitter
+
+`EventEmitter`
+
+##### event
+
+`string` \| `symbol`
 
 #### Returns
 
 `number`
 
-#### Inherited from
+#### Deprecated
 
-EventEmitter.listenerCount
-
-#### Defined in
-
-node_modules/@types/node/events.d.ts:17
-
-___
-
-### once
-
-▸ `Static` **once**(`emitter`, `event`): `Promise`<`any`[]\>
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `emitter` | `NodeEventTarget` |
-| `event` | `string` \| `symbol` |
-
-#### Returns
-
-`Promise`<`any`[]\>
+since v4.0.0
 
 #### Inherited from
 
-EventEmitter.once
+`EventEmitter.listenerCount`
 
-#### Defined in
+***
 
-node_modules/@types/node/events.d.ts:13
+### once()
 
-▸ `Static` **once**(`emitter`, `event`): `Promise`<`any`[]\>
+#### Call Signature
 
-#### Parameters
+> `static` **once**(`emitter`, `event`): `Promise`\<`any`[]\>
 
-| Name | Type |
-| :------ | :------ |
-| `emitter` | `DOMEventTarget` |
-| `event` | `string` |
+Defined in: node\_modules/@types/node/events.d.ts:13
 
-#### Returns
+##### Parameters
 
-`Promise`<`any`[]\>
+###### emitter
 
-#### Inherited from
+`NodeEventTarget`
 
-EventEmitter.once
+###### event
 
-#### Defined in
+`string` \| `symbol`
 
-node_modules/@types/node/events.d.ts:14
+##### Returns
+
+`Promise`\<`any`[]\>
+
+##### Inherited from
+
+`EventEmitter.once`
+
+#### Call Signature
+
+> `static` **once**(`emitter`, `event`): `Promise`\<`any`[]\>
+
+Defined in: node\_modules/@types/node/events.d.ts:14
+
+##### Parameters
+
+###### emitter
+
+`DOMEventTarget`
+
+###### event
+
+`string`
+
+##### Returns
+
+`Promise`\<`any`[]\>
+
+##### Inherited from
+
+`EventEmitter.once`
