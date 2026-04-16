@@ -69,6 +69,8 @@ Compile the Typescript source code to Javascript (in the dist folder) using thes
 
 ```sh
 npm install
+npm run lint
+npm run format
 npm run build
 ```
 

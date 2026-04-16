@@ -49,8 +49,7 @@ export default class AV1Transport {
       return;
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const fmtpConfig = transform.parseParams(fmtp.config);
+    const _fmtpConfig = transform.parseParams(fmtp.config);
 
     /*
     const _profile = fmtpConfig['profile'].toString();
